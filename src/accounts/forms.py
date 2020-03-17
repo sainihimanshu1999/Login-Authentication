@@ -1,4 +1,4 @@
-from django import form
+from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
 
@@ -35,7 +35,7 @@ class UserRegisterForm(forms.ModelForm):
     password2 = forms.CharField(label = 'Confirm Password', widget =forms.PasswordInput)
 
     class Meta:
-        model = User,
+        model = User
         fields = [
             'username',
             'email',
@@ -56,6 +56,7 @@ class UserRegisterForm(forms.ModelForm):
 
         if password != password2:
             raise forms.ValidationError("Passwords must match")
+        return super(UserRegisterForm, self).clean(*args, **kwargs)
 
 
 
